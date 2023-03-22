@@ -1,0 +1,12 @@
+<% if user != current_user %>
+    <%= form_with model: user, method: :destroy do |f| %>
+      <div class='form-group'>
+        <%= f.submit "フォロー外す", class:"btn btn-primary" %>
+      </div>
+    <% end %>
+    <%= form_with model: user do |f| %>
+      <div class='form-group'>
+        <%= f.submit "フォローする", class:"btn btn-success" %>
+      </div>
+    <% end %>
+<% end %>
