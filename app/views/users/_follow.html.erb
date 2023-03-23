@@ -1,12 +1,14 @@
-<% if user != current_user %>
-    <%= form_with model: user, method: :destroy do |f| %>
-      <div class='form-group'>
-        <%= f.submit "フォロー外す", class:"btn btn-primary" %>
-      </div>
-    <% end %>
-    <%= form_with model: user do |f| %>
+<% unless user == current_user %>
+  <% if current_user.following?(user) %>
+    <div class='form-group'>
+      <%= button_to t('フォロー外す'), relationship_path, method: :delete, class:"btn btn-primary" %>
+    </div>
+  <% else %>
+    <%= form_with model: User do |f| %>
+      <%= hidden_field_tag :follow_id, user.id %>
       <div class='form-group'>
         <%= f.submit "フォローする", class:"btn btn-success" %>
       </div>
     <% end %>
+  <% end %>
 <% end %>
