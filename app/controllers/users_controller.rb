@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :ensure_correct_user, only: [:edit, :update, :destroy, :following, :followers]
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy, followeds, :followers]
 
   def show
     @user = User.find(params[:id])
@@ -22,6 +22,16 @@ class UsersController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def followeds
+    @user = User.find(params[:id])
+    @followeds = @user.followed_users
+  end
+
+  def followers
+    @user = User.find(params[:id])
+    @followers = @user.follower_users
   end
 
   private
