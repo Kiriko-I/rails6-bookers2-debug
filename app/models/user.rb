@@ -23,16 +23,16 @@ class User < ApplicationRecord
   end
 
 
-  def follow(other_user_id)
+  def follow(other_user)
     followers.create(followed_id: other_user_id)
   end
 
   def following?(other_user)
     followed_users.include?(other_user)
   end
-  
+
   def unfollow(other_user)
-    followers.destroy(followed_id: other_user_id)
+    active_relationships.find_by(followed_id: other_user_id).destroy
   end
 
 end
