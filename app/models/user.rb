@@ -24,7 +24,7 @@ class User < ApplicationRecord
 
 
   def follow(other_user)
-    followers.create(followed_id: other_user_id)
+    active_relationships.create(followed_id: other_user_id)
   end
 
   def following?(other_user)
