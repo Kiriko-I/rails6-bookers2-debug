@@ -1,6 +1,6 @@
 <h2><%= @data %> search for "<%= @word %>"</h2>
-  <% if @data === "Users" %>
+  <% if @data == "Users" %>
       <%= render 'users/index', users: @posts %>
-  <% elsif @data === "Books" %>
+  <% elsif @data == "Books" %>
       <%= render 'books/index', books: @posts %>
   <% end %>

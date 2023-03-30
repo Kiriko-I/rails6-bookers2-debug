@@ -31,6 +31,5 @@ class SearchesController < ApplicationController
         @posts = Book.all
       end
     end
-    render 'search'
   end
 end
