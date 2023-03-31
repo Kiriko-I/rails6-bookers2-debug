@@ -28,18 +28,14 @@
           <td>コメント数：<%= @books.book_comments.count %></td>
         </tr>
       </table>
-      <div id="comments">
-        <%= render "book_comments/index", books: @books %>
-      </div>
-      <div class="new-comment">
-        <%= render "book_comments/form", books: @books, book_comment: @book_comment %>
-      </div>
+      <%= render "book_comments/index", books: @books %>
+      <%= render "book_comments/form", books: @books, book_comment: @book_comment %>
     </div>
   </div>
 </div>
 
 <script>
-$(".favorite-btn-<%= @book.id %>").click(function(){
+$(".favorite-btn-<%= @book.id %>").on('click',function(){
     location.reload();
 });
 </script>
