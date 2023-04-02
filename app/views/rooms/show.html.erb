@@ -1,0 +1,11 @@
+<h2><%= @room.user.name %>さんとのチャット</h2>
+
+<% @messages.each do |m| %>
+  <strong><%= m.body %></strong>
+  <small><%= m.user.name %>さん</small>
+<% end %>
+
+<%= form_with model: message do |f| %>
+  <%= f.text_field :body %>
+  <%= f.hidden_field :room_id, value: @room.id %>
+<% end %>

@@ -6,6 +6,18 @@
         <%= f.submit 'フォロー外す', class:"btn btn-primary" %>
       </div>
     <% end %>
+    <% if (current_user.followed_by? user) && (user.followed_by? current_user) %>
+    <% if @is_room == true %>
+      <p><a href="/rooms/<%= room_id %>">chat</a></p>
+    <% else %>
+      <%= form_with model: room do |r| %>
+        <%= fields_for url: rooms_path do |e| %>
+          <%= e.hidden_field :user_id, value: user.id %>
+        <% end %>
+        <%= r.submit 'chatを始める' %>
+      <% end %>
+    <% end %>
+    <% end %>
   <% else %>
     <%= form_with model: @set_relationship, url: relationships_path,local: true do |f| %>
       <%= f.hidden_field :followed_id, value: user.id %>

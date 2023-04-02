@@ -8,6 +8,22 @@ class UsersController < ApplicationController
     @book = Book.new
     @relationship = current_user.active_relationships.find_by(followed_id: @user.id)
     @set_relationship = current_user.active_relationships.new
+    @current_user_entry = Entry.where(user_id: current_user.id)
+    @user_entry = Entry.where(user_id: @user.id)
+    unless @user.id == current_user.id
+      @current_user_entry.each do |current|
+        @user_entry.each do |user|
+          if current.room_id == user.room_id
+            @is_room = true
+            @room_id = current.room_id
+          end
+        end
+      end
+      if @is_room != true
+        @room = Room.new
+        @entry = Entry.new
+      end
+    end
   end
 
   def index
