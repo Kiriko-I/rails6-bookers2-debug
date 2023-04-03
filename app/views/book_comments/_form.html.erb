@@ -1,10 +1,4 @@
 <%= form_with(model: [books, book_comment], local: false) do |f| %>
-  <%= f.text_area :comment, rows: '5', class: 'form-control book_comment' %>
-  <div class="new-comment"><%= f.submit "送信" %></div>
+  <%= f.text_area :comment, rows: '5', class: "w-100 comment-textarea" %>
+  <%= f.submit "送信" %>
 <% end %>
-
-<script>
-$(".new-comment").on('click',function(){
-    location.reload();
-});
-</script>

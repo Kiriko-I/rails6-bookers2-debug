@@ -18,25 +18,21 @@
           </td>
           <td><%= link_to @books.title, @books %></td>
           <td><%= @books.body %></td>
-        <td class="favorite-btn-<%= @book.id %>">
+        <td class=<%= "favorite-" + @books.id.to_s %>>
           <%= render "favorites/favorite-btn", book: @books %>
         </td>
           <% if @books.user == current_user %>
             <td><%= link_to 'Edit', edit_book_path(@books), class: "btn btn-sm btn-success" %></td>
             <td><%= link_to 'Destroy', @books, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
           <% end %>
-          <td>コメント数：<%= @books.book_comments.count %></td>
+          <td class="book-comments-counter"><%= render "book_comments/counter", books: @books %></td>
           <td>閲覧数：<%= @books.book_view_counts.count %></td>
         </tr>
       </table>
-      <%= render "book_comments/index", books: @books %>
-      <%= render "book_comments/form", books: @books, book_comment: @book_comment %>
+      <div class="book-comments-index">
+        <%= render "book_comments/index", books: @books %>
+      </div>
+        <%= render "book_comments/form", books: @books, book_comment: @book_comment %>
     </div>
   </div>
 </div>
-
-<script>
-$(".favorite-btn-<%= @book.id %>").on('click',function(){
-    location.reload();
-});
-</script>
