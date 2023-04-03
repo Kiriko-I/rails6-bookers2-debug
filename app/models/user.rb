@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_many :follower_users, through: :passive_relationships, source: :follower
   has_many :messages, dependent: :destroy
   has_many :entries, dependent: :destroy
-
+  has_many :book_view_counts, dependent: :destroy
 
   has_one_attached :profile_image
 
