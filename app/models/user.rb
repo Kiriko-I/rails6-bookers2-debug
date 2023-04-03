@@ -25,6 +25,8 @@ class User < ApplicationRecord
     (profile_image.attached?) ? profile_image : 'no_image.jpg'
   end
 
-
+  def followed_by?(user)
+    passive_relationships.find_by(follower_id: user.id).present?
+  end
 
 end

@@ -8,10 +8,10 @@
     <% end %>
     <% if (current_user.followed_by? user) && (user.followed_by? current_user) %>
     <% if @is_room == true %>
-      <p><a href="/rooms/<%= room_id %>">chat</a></p>
+      <p><a href="/rooms/<%= @room_id %>">chat</a></p>
     <% else %>
       <%= form_with model: room do |r| %>
-        <%= fields_for url: rooms_path do |e| %>
+        <%= fields_for :entry do |e| %>
           <%= e.hidden_field :user_id, value: user.id %>
         <% end %>
         <%= r.submit 'chatを始める' %>
