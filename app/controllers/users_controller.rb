@@ -7,6 +7,11 @@ class UsersController < ApplicationController
     @books = @user.books
     @book = Book.new
     
+    @today_book = @books.created_today
+    @yesterday_book = @books.created_yesterday
+    @this_week_book = @books.created_this_week
+    @last_week_book = @books.created_last_week
+    
     @relationship = current_user.active_relationships.find_by(followed_id: @user.id)
     @set_relationship = current_user.active_relationships.new
     
