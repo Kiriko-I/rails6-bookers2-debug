@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       get :followeds, :followers
       resource :relationships, only: [:create, :destroy]
     end
+    get "search"=>"users#search"
   end
   
   resources :rooms, only: [:create, :show]

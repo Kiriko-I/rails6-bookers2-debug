@@ -6,15 +6,15 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @books = @user.books
     @book = Book.new
-    
+
     @today_book = @books.created_today
     @yesterday_book = @books.created_yesterday
     @this_week_book = @books.created_this_week
     @last_week_book = @books.created_last_week
-    
+
     @relationship = current_user.active_relationships.find_by(followed_id: @user.id)
     @set_relationship = current_user.active_relationships.new
-    
+
     @current_user_entry = Entry.where(user_id: current_user.id)
     @user_entry = Entry.where(user_id: @user.id)
     unless @user.id == current_user.id
@@ -30,6 +30,17 @@ class UsersController < ApplicationController
         @room = Room.new
         @entry = Entry.new
       end
+    end
+  end
+
+  def search
+    @user = User.find(params[:user_id])
+    @books = @user.books
+    if params[:created_at] == ""
+      @search_book = "日付を選択してください"
+    else
+      search_date = params[:created_at]
+      @search_book = @books.where("created_at LIKE?", "#{search_date}%").count
     end
   end
 
