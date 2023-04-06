@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
-  resources :groups
+  resources :groups do
+    get "join" => "groups#join"
+  end
+
   root to: "homes#top"
   get "home/about" => "homes#about"
 
