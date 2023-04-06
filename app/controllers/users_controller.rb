@@ -43,6 +43,13 @@ class UsersController < ApplicationController
       @search_book = @books.where("created_at LIKE?", "#{search_date}%").count
     end
   end
+  # もっとスリムに書ける↓
+  # def daily_posts
+  #   user = User.find(params[:user_id])
+  #   @books = user.books.where(created_at: params[:created_at].to_date.all_day)
+  #   render :daily_posts_form
+  # end
+
 
   def index
     @users = User.all

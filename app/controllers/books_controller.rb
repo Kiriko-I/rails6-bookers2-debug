@@ -5,7 +5,7 @@ class BooksController < ApplicationController
     @book = Book.new
     @books = Book.find(params[:id])
     @book_comment = BookComment.new
-    
+
     @current_user_entry = Entry.where(user_id: current_user.id)
     @user_entry = Entry.where(user_id: @books.user_id)
     unless @books.user_id == current_user.id
@@ -22,9 +22,9 @@ class BooksController < ApplicationController
         @entry = Entry.new
       end
     end
-  
+
     current_user.book_view_counts.create(book_id: @books.id)
-    
+
   end
 
   def index
@@ -57,6 +57,7 @@ class BooksController < ApplicationController
     if @book.update(book_params)
       redirect_to book_path(@book), notice: "You have updated book successfully."
     else
+      @book = Book.find(params[:id])
       render "edit"
     end
   end

@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
 
+  resources :groups
   root to: "homes#top"
-  get "home/about"=>"homes#about"
-  
-  get '/search'=>"searches#search"
+  get "home/about" => "homes#about"
+
+  get '/search' => "searches#search"
 
   devise_for :users
 
@@ -17,9 +18,9 @@ Rails.application.routes.draw do
       get :followeds, :followers
       resource :relationships, only: [:create, :destroy]
     end
-    get "search"=>"users#search"
+    get "search" => "users#search"
   end
-  
+
   resources :rooms, only: [:create, :show]
   resources :messages, only: [:create]
 
