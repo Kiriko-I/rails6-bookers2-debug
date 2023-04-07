@@ -1,15 +1,10 @@
 Rails.application.routes.draw do
-
-  resources :groups do
-    get "join" => "groups#join"
-  end
+  devise_for :users
 
   root to: "homes#top"
   get "home/about" => "homes#about"
 
   get '/search' => "searches#search"
-
-  devise_for :users
 
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
     resource :favorites, only: [:create, :destroy]
@@ -26,6 +21,10 @@ Rails.application.routes.draw do
 
   resources :rooms, only: [:create, :show]
   resources :messages, only: [:create]
+
+  resources :groups, only: [:new, :index, :show, :create, :edit, :update] do
+    resource :group_users, only: [:create, :destroy]
+  end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
