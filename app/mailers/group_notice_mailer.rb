@@ -9,6 +9,6 @@ class GroupNoticeMailer < ApplicationMailer
         to: user.email,
         subject: 'ご案内'
         )
-      end
+    end
   end
 end
