@@ -18,15 +18,16 @@
           </td>
           <td><%= link_to @books.title, @books %></td>
           <td><%= @books.body %></td>
-        <td class=<%= "favorite-" + @books.id.to_s %>>
-          <%= render "favorites/favorite-btn", book: @books %>
-        </td>
+          <td class=<%= "favorite-" + @books.id.to_s %>>
+            <%= render "favorites/favorite-btn", book: @books %>
+          </td>
+          <td class="book-comments-counter"><%= render "book_comments/counter", books: @books %></td>
+          <!--<td>閲覧数：<%= @books.book_view_counts.count %></td>-->
+          <td id="stars-<%= @books.id %>"></td>
           <% if @books.user == current_user %>
             <td><%= link_to 'Edit', edit_book_path(@books), class: "btn btn-sm btn-success" %></td>
             <td><%= link_to 'Destroy', @books, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
           <% end %>
-          <td class="book-comments-counter"><%= render "book_comments/counter", books: @books %></td>
-          <td>閲覧数：<%= @books.book_view_counts.count %></td>
         </tr>
       </table>
       <div class="book-comments-index">
@@ -36,3 +37,13 @@
     </div>
   </div>
 </div>
+<script>
+  elem = document.querySelector('#stars-<%= @books.id %>');
+  opt = {
+    starOn: "<%= asset_path('star-on.png') %>",
+    starOff: "<%= asset_path('star-off.png') %>",
+    score: <%= @books.evaluation %>,
+    readOnly: true
+  };
+  raty(elem,opt);
+</script>

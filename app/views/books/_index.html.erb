@@ -23,10 +23,22 @@
         <td>
           コメント数：<%= book.book_comments.count %>
         </td>
-        <td>
-          閲覧数：<%= book.book_view_counts.count %>
-        </td>
+        <td id="stars-<%= book.id %>"></td>
+        <script>
+          elem = document.querySelector('#stars-<%= book.id %>');
+          opt = {
+            starOn: "<%= asset_path('star-on.png') %>",
+            starOff: "<%= asset_path('star-off.png') %>",
+            score: <%= book.evaluation %>,
+            readOnly: true
+          };
+          raty(elem,opt);
+        </script>
+        <!--<td>-->
+        <!--  閲覧数：<%= book.book_view_counts.count %>-->
+        <!--</td>-->
       </tr>
     <% end %>
   </tbody>
 </table>
+
