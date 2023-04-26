@@ -26,12 +26,17 @@ class BooksController < ApplicationController
 
   def index
     @book = Book.new
-    to = Time.current.at_end_of_day
-    from = (to - 6.day).at_beginning_of_day
-    @books = Book.all.
-      sort_by {|x|
+    if params[:latest]
+      @books = Book.latest
+    elsif params[:evaluation]
+      @books = Book.evaluation
+    else
+      to = Time.current.at_end_of_day
+      from = (to - 6.day).at_beginning_of_day
+      @books = Book.all.sort_by {|x|
         x.favorites.where(created_at: from...to).count
-      }.reverse
+        }.reverse
+    end
   end
 
   def create

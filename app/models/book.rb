@@ -19,6 +19,9 @@ class Book < ApplicationRecord
   scope :created_this_week, -> { where(created_at: Time.current.ago(6.days).beginning_of_day..Time.current.end_of_day) }
   scope :created_last_week, -> { where(created_at: Time.current.ago(2.weeks).beginning_of_day..Time.current.ago(1.week).end_of_day) }
 
+  scope :latest, -> { order("created_at DESC") }
+  scope :evaluation, -> { order("evaluation DESC") }
+
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
