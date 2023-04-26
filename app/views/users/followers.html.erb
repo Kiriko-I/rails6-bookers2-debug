@@ -1,5 +1,5 @@
 <h1>Follwer Users</h1>
-<% if @followers.exists? %>
+<% if @users.exists? %>
   <table class='table'>
     <thead>
       <tr>
@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @followers.each do |user| %>
+      <% @users.each do |user| %>
         <tr>
           <td><%= image_tag user.get_profile_image, size: '50x50' %></td>
           <td><%= user.name %></td>
