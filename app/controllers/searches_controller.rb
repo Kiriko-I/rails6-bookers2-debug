@@ -32,9 +32,11 @@ class SearchesController < ApplicationController
       end
     end
     
+    tag = params[:search_tag]
     if params[:search_tag]
       @data = "Books"
-      @posts = Book.where()
+      @word = params[:search_tag]
+      @posts = Book.where(tag: "#{tag}")
     end
   end
 end

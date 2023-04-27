@@ -18,7 +18,7 @@
           </td>
           <td><%= link_to @books.title, @books %></td>
           <td><%= @books.body %></td>
-          <td><%= link_to @books.tag, root_path %></td>
+          <td><%= link_to @books.tag, search_path(search_tag: @books.tag) %></td>
           <td class=<%= "favorite-" + @books.id.to_s %>>
             <%= render "favorites/favorite-btn", book: @books %>
           </td>
