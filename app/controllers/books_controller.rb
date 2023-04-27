@@ -26,10 +26,8 @@ class BooksController < ApplicationController
 
   def index
     @book = Book.new
-    if params[:latest]
-      @books = Book.latest
-    elsif params[:evaluation]
-      @books = Book.evaluation
+    if params[:sort]
+      @books = Book.all.order(params[:sort])
     else
       to = Time.current.at_end_of_day
       from = (to - 6.day).at_beginning_of_day
